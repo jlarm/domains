@@ -12,7 +12,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command('app:send-domain-expiry-email')->everyMinute()->runInBackground();
+        $schedule->command('app:send-domain-expiry-email')->daily()->runInBackground();
+        $schedule->command('update:expired-domain-status')->daily()->runInBackground();
     }
 
     /**
