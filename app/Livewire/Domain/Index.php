@@ -10,11 +10,6 @@ class Index extends Component
 {
     use Searchable, Sortable, WithPagination;
 
-    public function placeholder()
-    {
-        return view('livewire.domain.table-placeholder');
-    }
-
     public function render()
     {
         $query = Domain::query();
