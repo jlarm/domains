@@ -11,7 +11,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', IndexController::class)->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () { return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/domains/create', function () { return view('domain.create'); })->name('domains.create');
