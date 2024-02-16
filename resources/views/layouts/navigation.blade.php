@@ -11,6 +11,12 @@
                     <x-nav-link wire:navigate :href="route('domains.create')" :active="request()->routeIs('domains.create')">
                         {{ __('Add domain') }}
                     </x-nav-link>
+                    <x-nav-link wire:navigate href="/pulse">
+                        {{ __('Pulse') }}
+                    </x-nav-link>
+                    <x-nav-link wire:navigate href="/telescope">
+                        {{ __('Telescope') }}
+                    </x-nav-link>
                 </div>
             </div>
 
