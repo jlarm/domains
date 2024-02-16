@@ -2,26 +2,13 @@
 
 namespace App\Livewire\Domain;
 
+use App\Livewire\Forms\DomainForm;
 use App\Models\Domain;
-use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class Create extends Component
 {
-    #[Validate('required', 'unique:domains', 'max:255', 'string')]
-    public $name;
-
-    #[Validate('required', 'max:255', 'string')]
-    public $registrar;
-
-    #[Validate('required', 'url')]
-    public $registrar_url;
-
-    #[Validate('required', 'date')]
-    public $expiration;
-
-    #[Validate('required', 'boolean')]
-    public $status = 1;
+    public DomainForm $form;
 
     public function create()
     {
