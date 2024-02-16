@@ -11,14 +11,20 @@
             <th scope="col" class="px-6 py-3" style="width: 1%;">
                 <span class="sr-only">Status</span>
             </th>
-            <th scope="col" class="w-2/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Name
+            <th scope="col">
+                <x-domain.index.sortable column="name" :$sortCol :$sortAsc>
+                    <div>Name</div>
+                </x-domain.index.sortable>
             </th>
-            <th scope="col" class="w-2/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Registrar
+            <th scope="col">
+                <x-domain.index.sortable column="registrar" :$sortCol :$sortAsc>
+                    <div>Registrar</div>
+                </x-domain.index.sortable>
             </th>
-            <th scope="col" class="w-2/12 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Expires
+            <th scope="col">
+                <x-domain.index.sortable column="expiration" :$sortCol :$sortAsc>
+                    <div>Expires</div>
+                </x-domain.index.sortable>
             </th>
             <th scope="col" class="relative px-6 py-3">
                 <span class="sr-only">Edit</span>
@@ -32,6 +38,9 @@
         </tbody>
     </table>
     <div class="p-5">
-        {{ $domains->links() }}
+        <div class="flex justify-between items-center">
+            <div class="text-gray-700 text-sm">Results: {{ \Illuminate\Support\Number::format($domains->total()) }}</div>
+            {{ $domains->links('livewire.domain.pagination') }}
+        </div>
     </div>
 </div>
