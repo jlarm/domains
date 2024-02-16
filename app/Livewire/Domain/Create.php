@@ -14,15 +14,9 @@ class Create extends Component
     {
         $this->validate();
 
-        Domain::create([
-            'name' => $this->name,
-            'registrar' => $this->registrar,
-            'registrar_url' => $this->registrar_url,
-            'expiration' => $this->expiration,
-            'status' => $this->status,
-        ]);
+        Domain::create($this->form->all());
 
-        $this->reset();
+        $this->form->reset();
     }
 
     public function render()
