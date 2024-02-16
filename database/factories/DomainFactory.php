@@ -19,7 +19,6 @@ class DomainFactory extends Factory
             'registrar' => $this->faker->word(),
             'expiration' => Carbon::now(),
             'status' => $this->faker->boolean(),
-            'favicon' => $this->faker->word(),
         ];
     }
 }

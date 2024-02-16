@@ -15,7 +15,6 @@ class Domain extends Model
         'registrar_url',
         'expiration',
         'status',
-        'favicon',
     ];
 
     protected $casts = [

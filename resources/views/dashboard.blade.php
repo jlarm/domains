@@ -53,7 +53,7 @@
                             {{ $domain->expiration->diffForHumans() }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-right">
-                            edit
+                            <a href="{{ route('domains.edit', $domain) }}" class="text-cyan-600 hover:text-cyan-900">Edit</a>
                         </td>
                     </tr>
                     @endforeach

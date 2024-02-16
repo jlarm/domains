@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->string('registrar_url');
             $table->date('expiration');
             $table->boolean('status')->default(false);
-            $table->string('favicon')->nullable();
             $table->timestamps();
         });
     }

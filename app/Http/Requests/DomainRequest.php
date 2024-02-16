@@ -14,7 +14,6 @@ class DomainRequest extends FormRequest
             'registrar_url' => ['required', 'url'],
             'expiration' => ['required', 'date'],
             'status' => ['boolean'],
-            'favicon' => ['nullable'],
         ];
     }
 

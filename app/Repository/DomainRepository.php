@@ -9,15 +9,25 @@ class DomainRepository
 {
     public function create($data)
     {
-        $favicon = Favicon::fetch($data['registrar_url'])->store('favicons');
-
         return Domain::create([
             'name' => $data['name'],
             'registrar' => $data['registrar'],
             'registrar_url' => $data['registrar_url'],
             'expiration' => $data['expiration'],
             'status' => $data['status'],
-            'favicon' => $favicon,
+        ]);
+    }
+
+    public function update($id, $data)
+    {
+        $domain = Domain::find($id);
+
+        return $domain->update([
+            'name' => $data['name'],
+            'registrar' => $data['registrar'],
+            'registrar_url' => $data['registrar_url'],
+            'expiration' => $data['expiration'],
+            'status' => $data['status'],
         ]);
     }
 }
