@@ -11,6 +11,7 @@
         "laravel/framework": "^10.10",
         "laravel/pulse": "^1.0@beta",
         "laravel/sanctum": "^3.3",
+        "laravel/telescope": "^4.17",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.4"
     },
