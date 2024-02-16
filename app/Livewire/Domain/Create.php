@@ -10,6 +10,8 @@ class Create extends Component
 {
     public DomainForm $form;
 
+    public $showSuccessIndicator = false;
+
     public function create()
     {
         $this->validate();
@@ -17,6 +19,8 @@ class Create extends Component
         Domain::create($this->form->all());
 
         $this->form->reset();
+
+        $this->showSuccessIndicator = true;
     }
 
     public function render()
