@@ -15,9 +15,9 @@
                     <form action="{{ route('domains.store') }}" method="POST" class="space-y-5">
                         @csrf
 
-                        <!-- Domain Name -->
+                        <!-- domain Name -->
                         <div>
-                            <x-input-label for="name" :value="__('Domain Name')" />
+                            <x-input-label for="name" :value="__('domain Name')" />
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
