@@ -3,7 +3,6 @@
 namespace App\Livewire\Domain;
 
 use App\Models\Domain;
-use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,7 +10,6 @@ class Index extends Component
 {
     use WithPagination;
 
-    #[Url(history: true)]
     public $search = '';
 
     public function placeholder()
@@ -26,14 +24,28 @@ class Index extends Component
         HTML;
     }
 
+    public function updatedSearch()
+    {
+        $this->resetPage();
+    }
+
+    protected function applySearch($query)
+    {
+        $this->search === ''
+            ? $query
+            : $query
+                ->where('name', 'like', '%'.$this->search.'%')
+                ->orWhere('registrar', 'like', '%'.$this->search.'%');
+    }
+
     public function render()
     {
+        $query = Domain::orderBy('expiration')->orderBy('name');
+
+        $this->applySearch($query);
+
         return view('livewire.domain.index', [
-            'domains' => Domain::query()
-                ->search('name', $this->search)
-                ->orderBy('expiration')
-                ->orderBy('name')
-                ->paginate(15),
+            'domains' => $query->paginate(15),
         ]);
     }
 }
