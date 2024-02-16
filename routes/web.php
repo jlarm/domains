@@ -1,23 +1,21 @@
 <?php
 
-use App\Http\Controllers\Domain\CreateController;
-use App\Http\Controllers\Domain\EditController;
-use App\Http\Controllers\Domain\IndexController;
-use App\Http\Controllers\Domain\UpdateController;
 use App\Http\Controllers\ProfileController;
+use App\Livewire\Domain\Create;
+use App\Livewire\Domain\Edit;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () { return view('dashboard'); })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/domains/create', function () { return view('domain.create'); })->name('domains.create');
-    Route::post('/domains/create', CreateController::class)->name('domains.store');
-    Route::get('/domains/{domain}/edit', EditController::class)->name('domains.edit');
-    Route::patch('/domains/{domain}', UpdateController::class)->name('domains.update');
+    Route::get('/domains/create', Create::class)->name('domains.create');
+    Route::get('/domains/{domain}/edit', Edit::class)->name('domains.edit');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

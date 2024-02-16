@@ -28,7 +28,7 @@ class Index extends Component
             'domains' => Domain::query()
                 ->orderBy('expiration')
                 ->orderBy('name')
-                ->paginate(10),
+                ->paginate(15),
         ]);
     }
 }
