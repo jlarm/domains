@@ -3,12 +3,16 @@
 namespace App\Livewire\Domain;
 
 use App\Models\Domain;
+use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class Index extends Component
 {
     use WithPagination;
+
+    #[Url(history: true)]
+    public $search = '';
 
     public function placeholder()
     {
@@ -26,6 +30,7 @@ class Index extends Component
     {
         return view('livewire.domain.index', [
             'domains' => Domain::query()
+                ->search('name', $this->search)
                 ->orderBy('expiration')
                 ->orderBy('name')
                 ->paginate(15),
