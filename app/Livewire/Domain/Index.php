@@ -14,9 +14,9 @@ class Index extends Component
     {
         $query = Domain::query();
 
-        $this->applySearch($query);
+        $query = $this->applySearch($query);
 
-        $this->applySorting($query);
+        $query = $this->applySorting($query);
 
         $domains = $query->orderBy('expiration')->orderBy('name')->paginate(15);
 

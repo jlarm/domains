@@ -33,7 +33,7 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
         @foreach($domains as $domain)
-            <livewire:domain.index-item :domain="$domain" :key="$domain->id" />
+            <livewire:domain.index-item :$domain wire:key="{{ $domain->id }}" />
         @endforeach
         </tbody>
     </table>
