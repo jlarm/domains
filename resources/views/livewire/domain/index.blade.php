@@ -2,7 +2,13 @@
     <div class="p-5 flex justify-between items-center">
         <h3 class="text-lg leading-6 font-medium text-gray-900">Domains</h3>
         <div>
-            <input wire:model.live.debounce.500ms="search" type="search" placeholder="Search..." class="flex w-full h-10 px-3 py-2 text-sm bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />
+            <div class="relative text-sm text-gray-800 col-span-3">
+                <div class="absolute pl-2 left-0 top-0 bottom-0 flex items-center pointer-events-none text-gray-500">
+                    <x-icon.magnifying-glass />
+                </div>
+
+                <input wire:model.live="search" type="text" placeholder="Search..." class="block w-full rounded-lg border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
+            </div>
         </div>
     </div>
     <table class="table-fixed min-w-full divide-y divide-gray-200">
@@ -33,7 +39,52 @@
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
         @foreach($domains as $domain)
-            <livewire:domain.index-item :$domain wire:key="{{ $domain->id }}" />
+            <div>
+                <tr>
+                    <td class="pl-6 py-4">
+                        @if($domain->status === 0 || $domain->expiration->isPast())
+                            <span class="flex h-2 w-2 relative mr-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                    <span class="inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                </span>
+                        @else
+                            <span class="flex h-2 w-2 relative mr-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                    <span class="inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                        @endif
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ $domain->name }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <a href="{{ $domain->registrar_url }}" target="_blank">
+                            {{ $domain->registrar }}
+                        </a>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        {{ $domain->expiration->diffForHumans() }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-right">
+                        <x-menu>
+                            <x-menu.button class="rounded hover:bg-gray-100 p-1">
+                                <x-icon.ellipsis-vertical />
+                            </x-menu.button>
+
+                            <x-menu.items>
+                                <x-menu.close>
+                                    <a href="{{ route('domains.edit', $domain) }}">
+                                        <x-menu.item type="link" href="test">
+                                            Edit
+                                        </x-menu.item>
+                                    </a>
+                                </x-menu.close>
+                            </x-menu.items>
+                        </x-menu>
+                    </td>
+                </tr>
+            </div>
+
         @endforeach
         </tbody>
     </table>
