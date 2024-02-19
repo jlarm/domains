@@ -18,7 +18,7 @@ class Index extends Component
 
         $this->applySorting($query);
 
-        $domains = $query->paginate(15);
+        $domains = $query->orderBy('expiration')->orderBy('name')->paginate(15);
 
         return view('livewire.domain.index', [
             'domains' => $domains,
