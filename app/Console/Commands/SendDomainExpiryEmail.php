@@ -33,6 +33,8 @@ class SendDomainExpiryEmail extends Command
             ->where('expiration', '=', now()->addDays(30))
             ->orWhere('expiration', '=', now()->addDays(7))
             ->orWhere('expiration', '=', now()->addDays(3))
+            ->orWhere('expiration', '=', now()->addDays(2))
+            ->orWhere('expiration', '=', now()->addDay())
             ->orWhere('expiration', '=', now())
             ->get();
 
