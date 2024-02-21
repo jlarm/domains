@@ -29,15 +29,14 @@ class SendDomainExpiryEmail extends Command
     public function handle()
     {
         $this->info('The command is starting');
+
         $domains = Domain::query()
-            ->where('expiration', '=', now()->addDays(30))
-            ->orWhere('expiration', '=', now()->addDays(7))
-            ->orWhere('expiration', '=', now()->addDays(5))
-            ->orWhere('expiration', '=', now()->addDays(4))
-            ->orWhere('expiration', '=', now()->addDays(3))
-            ->orWhere('expiration', '=', now()->addDays(2))
-            ->orWhere('expiration', '=', now()->addDay())
-            ->orWhere('expiration', '=', now())
+            ->whereDate('expiration', now()->addDays(30))
+            ->orWhereDate('expiration', now()->addDays(7))
+            ->orWhereDate('expiration', now()->addDays(3))
+            ->orWhereDate('expiration', now()->addDays(2))
+            ->orWhereDate('expiration', now()->addDay())
+            ->orWhereDate('expiration', now())
             ->get();
 
         $this->info('Found ' . $domains->count() . ' domains to send emails to');
