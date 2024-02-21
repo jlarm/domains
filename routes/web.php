@@ -10,9 +10,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
     Route::get('/domains/create', Create::class)->name('domains.create');
     Route::get('/domains/{domain}/edit', Edit::class)->name('domains.edit');
