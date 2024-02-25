@@ -7,7 +7,9 @@
                     <x-icon.magnifying-glass />
                 </div>
 
-                <input wire:model.live="search" type="text" placeholder="Search..." class="block w-full rounded-lg border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
+                <label>
+                    <input wire:model.live="search" type="text" placeholder="Search..." class="block w-full rounded-lg border-0 py-1.5 pl-10 text-gray-900 ring-1 ring-inset ring-gray-200 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-gray-600 sm:text-sm sm:leading-6">
+                </label>
             </div>
         </div>
     </div>
@@ -44,14 +46,14 @@
                     <td class="pl-6 py-4">
                         @if($domain->status === 0 || $domain->expiration->isPast())
                             <span class="flex h-2 w-2 relative mr-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                    <span class="inline-flex rounded-full h-2 w-2 bg-red-500"></span>
-                </span>
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                <span class="inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                            </span>
                         @else
                             <span class="flex h-2 w-2 relative mr-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                    <span class="inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
+                                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                                <span class="inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
                         @endif
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -63,7 +65,11 @@
                         </a>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {{ $domain->expiration->diffForHumans() }}
+                        @if ($domain->expiration->isPast())
+                            <span class="text-red-500">Expired</span>
+                        @else
+                            {{ $domain->expiration->format('F d, Y') }}
+                        @endif
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-right">
                         <x-menu>
