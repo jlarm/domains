@@ -22,7 +22,11 @@
             </a>
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-            {{ $domain->expiration->diffForHumans() }}
+            @if ($domain->expiration->isPast())
+                <span class="text-red-500">Expired</span>
+            @else
+            {{ $domain->expiration->format('F d, Y') }}
+            @endif
         </td>
         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300 text-right">
             <x-menu>
